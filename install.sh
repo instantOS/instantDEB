@@ -12,6 +12,8 @@ if ! [ -e ideb.sh ]; then
     cd ~/.cache/ideb
     git clone --depth=1 https://github.com/instantos/instantDEB
     cd instantDEB
+else
+    git pull
 fi
 
 chmod +x ./*.sh
