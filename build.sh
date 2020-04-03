@@ -10,7 +10,8 @@ fi
 mkdir .debcache
 cp PKGBUILD .debcache/
 cd .debcache
-/usr/share/instantdeb/controlgen.sh
+pushd .
+/usr/share/ideb/controlgen.sh
 mkdir -p package/DEBIAN
 mv control package/DEBIAN/
 export pkgdir="$(realpath ./package)"
@@ -30,3 +31,6 @@ fi
 prepare
 build
 package
+popd
+mkdir output
+dpkg-deb -Z xz -b package/ output/

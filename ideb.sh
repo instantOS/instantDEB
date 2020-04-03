@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# convert pkg
+##############################################
+## a tool to build PKGBUILD files on debian ##
+## or convert pkg files to deb packages     ##
+##############################################
 
 if [ -z "$1" ]; then
     echo "Usage: ideb filename.pkg.tar.xz"
@@ -17,7 +20,11 @@ if ! command -v dpkg &>/dev/null; then
     exit 1
 fi
 
-if [ "$1" = "build" ]; then
+case "$1" in
+build)
     /usr/share/ideb/build.sh
-    exit
-fi
+    ;;
+control)
+    /usr/share/ideb/controlgen.sh
+    ;;
+esac
