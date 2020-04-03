@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -e "PKGBUILD" ]; then
+if ! [ -e "PKGBUILD" ]; then
     echo "PKGBUILD not found"
     exit 1
 fi
@@ -8,7 +8,7 @@ fi
 [ -e .debcache ] && rm -rf .debcache
 
 mkdir .debcache
-cp PKGBUILD debcache/
+cp PKGBUILD .debcache/
 cd .debcache
 /usr/share/instantdeb/controlgen.sh
 mkdir -p package/DEBIAN

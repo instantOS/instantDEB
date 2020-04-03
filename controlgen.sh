@@ -7,7 +7,7 @@ if ! [ -e PKGBUILD ]; then
     exit 1
 fi
 
-source PKGBUILD/
+source PKGBUILD
 
 echo "Package: $pkgname" >control
 if type pkgver; then
