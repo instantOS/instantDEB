@@ -7,8 +7,14 @@
 
 A tool to convert pacman packages to debian packages. 
 Run this on the debian system you want to convert for, NOT on an arch based system. 
+You can also use PKGBUILD files on debian based systems using this. 
+This enables partial support for the AUR. 
+Please keep in mind that it is not entirely accurate and in very early stages of development. 
 
-## usage
+## Usage
 
 convert filename.pkg.tar.xz to filename.deb
 ```ideb filename.pkg.tar.xz```
+
+build a PKGBUILD and put out a deb file
+```ideb build```
