@@ -10,11 +10,6 @@ if [ -z "$1" ]; then
     exit
 fi
 
-if ! [ -e "$1" ]; then
-    echo "file $1 not found"
-    exit 1
-fi
-
 if ! command -v dpkg &>/dev/null; then
     echo "please run this on a debian system"
     exit 1
@@ -26,5 +21,8 @@ build)
     ;;
 control)
     /usr/share/ideb/controlgen.sh
+    ;;
+*)
+    /usr/share/ideb/convert.sh "$1"
     ;;
 esac

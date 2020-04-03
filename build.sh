@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "starting pkgbuild deb"
+
 if ! [ -e "PKGBUILD" ]; then
     echo "PKGBUILD not found"
     exit 1
@@ -34,3 +36,11 @@ package
 popd
 mkdir output
 dpkg-deb -Z xz -b package/ output/
+mv output/*.deb ../"$pkgname".deb
+cd ..
+
+if ! [ -e ~/.paperdebug ]; then
+    rm -rf .debcache
+fi
+
+echo "done building $pkgname"
