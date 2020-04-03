@@ -17,14 +17,22 @@ pushd .
 mkdir -p package/DEBIAN
 mv control package/DEBIAN/
 export pkgdir="$(realpath ./package)"
+export "$(realpath ./package)"
 source PKGBUILD
 
 if grep -q 'git\+' <<<"$source" &&
     grep -q 'https://.*\..*/.*' <<<"$source"; then
     echo "git source found"
     GITSOURCE=$(grep -o 'https://.*\..*/.*' <<<"$source")
-    git clone --depth=1 "$GITSOURCE" ./gitsource
-    export _pkgname=$(realpath ./gitsource)
+    
+    if grep -q '::' <<<"$source"; then
+        SOURCENAME=$(grep -o '^[^:]*' <<<"$source")
+    else
+        SOURCENAME=gitsource
+    fi
+
+    git clone --depth=1 "$GITSOURCE" "$SOURCENAME"
+    export _pkgname=$(realpath ./$SOURCENAME)
 else
     echo "no git source found"
     exit
