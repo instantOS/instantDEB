@@ -10,12 +10,13 @@ fi
 source PKGBUILD
 
 echo "Package: $pkgname" >control
+
 if type pkgver; then
     pkgver="$(pkgver)"
 fi
 
 echo "Version: $pkgver" >>control
-echo "Architecture: ${arch:-any}" >>control
+echo "Architecture: $(dpkg --print-architecture)" >>control
 echo "Maintainer: instantDEB <paperbenni@gmail.com>" >>control
 echo "Depends: bash" >>control
 echo "Recommends: bash" >>control
