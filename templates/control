@@ -1,0 +1,11 @@
+Package: pkgname
+Version: pkgversion
+Architecture: any
+Maintainer: instantDEB <paperbenni@gmail.com>
+Depends: bash
+Recommends: bash
+Section: misc
+Priority: optional
+Homepage: https://github.com/instantOS/instantDEB
+Description: pkgdescribe
+Original-Maintainer: paperbenni <paper.benni@gmail.com>
