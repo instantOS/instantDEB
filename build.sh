@@ -20,23 +20,25 @@ export pkgdir="$(realpath ./package)"
 export "$(realpath ./package)"
 source PKGBUILD
 
-if grep -q 'git\+' <<<"$source" &&
-    grep -q 'https://.*\..*/.*' <<<"$source"; then
-    echo "git source found"
-    GITSOURCE=$(grep -o 'https://.*\..*/.*' <<<"$source")
-    
-    if grep -q '::' <<<"$source"; then
-        SOURCENAME=$(grep -o '^[^:]*' <<<"$source")
-    else
-        SOURCENAME=gitsource
-    fi
+# fetch all sources
+for src in "${source[@]}"; do
+    echo "fetching ${src}"
+    if grep -q 'git\+' <<<"$src" &&
+        grep -q 'https://.*\..*/.*' <<<"$src"; then
+        echo "git source found"
+        GITSOURCE=$(grep -o 'https://.*\..*/.*' <<<"$src")
 
-    git clone --depth=1 "$GITSOURCE" "$SOURCENAME"
-    export _pkgname=$(realpath ./$SOURCENAME)
-else
-    echo "no git source found"
-    exit
-fi
+        if grep -q '::' <<<"$src"; then
+            SOURCENAME=$(grep -o '^[^:]*' <<<"$src")
+        else
+            SOURCENAME=gitsource
+        fi
+        git clone --depth=1 "$GITSOURCE" "$SOURCENAME"
+    else
+        echo "no git source found"
+        exit
+    fi
+done
 
 prepare
 build
