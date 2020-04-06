@@ -1,4 +1,6 @@
 librsvg:librsvg2-2
+librsvg:librsvg2-dev
 librsvg:rsvg-2.0
 libxcb
+libjpeg
 libxdg-basedir

@@ -15,7 +15,7 @@ if type pkgver; then
     pkgver="$(pkgver)"
 fi
 
-echo "Version: $pkgver" >>control
+echo "Version: IDEB-$pkgver" >>control
 echo "Architecture: $(dpkg --print-architecture)" >>control
 echo "Maintainer: instantDEB <paperbenni@gmail.com>" >>control
 echo "Depends: bash" >>control
@@ -24,7 +24,7 @@ echo "Section: misc" >>control
 echo "Priority: optional" >>control
 
 if [ -n "$pkgdesc" ]; then
-    echo "Description: $pkgdesc" >>control
+    echo "Description: IDEB-$pkgdesc" >>control
 else
     echo "Description: auto generated package by instantDEB" >>control
 fi
