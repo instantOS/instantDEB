@@ -41,20 +41,19 @@ for src in "${source[@]}"; do
             else
                 git clone --depth=1
             fi
+        fi
+    else
+        if [ -n "$SOURCENAME" ]; then
+            LINK="$(grep -o '::.*$' <<<"$src" | grep -Eo '[^:]{1,}:.*')"
         else
+            LINK="$src"
+        fi
 
-            if [ -n "$SOURCENAME" ]; then
-                LINK="$(grep -o '::.*$' <<<"$src" | grep -Eo '[^:]{1,}:.*')"
-            else
-                LINK="$src"
-            fi
-
-            echo "downloading direct file"
-            if [ -n "$SOURCENAME" ]; then
-                wget -O "$SOURCENAME" "$LINK"
-            else
-                wget "$LINK"
-            fi
+        echo "downloading direct file"
+        if [ -n "$SOURCENAME" ]; then
+            wget -O "$SOURCENAME" "$LINK"
+        else
+            wget "$LINK"
         fi
     fi
 
