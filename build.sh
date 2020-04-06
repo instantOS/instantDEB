@@ -21,6 +21,9 @@ export srcdir="$(realpath ./src)"
 export "$(realpath ./package)"
 source PKGBUILD
 
+echo "Dependencies: $depends"
+echo "Make dependencies: $makedepends"
+
 if [ -n "$install" ]; then
     if [ -e "$install" ]; then
         echo "copying install script"
@@ -46,7 +49,7 @@ for src in "${source[@]}"; do
 
             if grep -q 'branch=.*$' <<<"$src"; then
                 GITSOURCE="${GITSOURCE%\#*}"
-                BRANCHNAME=$(grep -o '[^=].*$' <<<"$src")
+                BRANCHNAME=$(grep -o 'branch=.*' <<<"$src" | grep -o '[^=].*$')
                 GITOPTIONS="--single-branch --branch $BRANCHNAME "
             fi
 
