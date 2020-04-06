@@ -111,6 +111,7 @@ package
 
 popd
 pushd .
+cp PKGBUILD src/PKGBUILD
 cd src
 /usr/share/ideb/controlgen.sh
 popd

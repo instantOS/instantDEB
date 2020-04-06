@@ -1,0 +1,4 @@
+librsvg:librsvg2-2
+librsvg:rsvg-2.0
+libxcb
+libxdg-basedir
