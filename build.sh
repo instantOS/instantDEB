@@ -15,12 +15,21 @@ cd .debcache
 pushd .
 /usr/share/ideb/controlgen.sh
 mkdir -p package/DEBIAN
+mkdir src
 mv control package/DEBIAN/
+
 export pkgdir="$(realpath ./package)"
+export srcdir="$(realpath ./src)"
 export "$(realpath ./package)"
 source PKGBUILD
 
-mkdir src
+if [ -n "$install" ]; then
+    if [ -e "$install" ]; then
+        echo "copying install script"
+        cp "$install" package/DEBIAN/postinst
+        chmod +x package/DEBIAN/postinst
+    fi
+fi
 
 # fetch all sources
 for src in "${source[@]}"; do
