@@ -18,3 +18,15 @@ convert filename.pkg.tar.xz to filename.deb
 
 build a PKGBUILD and put out a deb file
 ```ideb build```
+
+## What does NOT work?
+It is pretty obvious what this does when it works, it makes archy stuff work on debian. 
+So what does and will not work?
+
+### Dependency management
+Packages are named different on arch and debian, 
+so trying to install packages listed in an arch package would not work.  
+
+### Arch specific library packages
+There are packages that symlink libraries or even download binariy libraries. 
+Those are out of control of this project and might or may not work. 
