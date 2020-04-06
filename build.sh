@@ -49,15 +49,15 @@ for src in "${source[@]}"; do
 
             if grep -q 'branch=.*$' <<<"$src"; then
                 GITSOURCE="${GITSOURCE%\#*}"
-                BRANCHNAME=$(grep -o 'branch=.*' <<<"$src" | grep -o '[^=].*$')
+                BRANCHNAME=$(grep -o 'branch=.*' <<<"$src" | grep -o '[^=]*$')
             else
                 BRANCHNAME="master"
             fi
 
             if [ -n "$SOURCENAME" ]; then
-                git clone --single-branch --branch "$BRANCHNAME" --depth=1 "$GITOPTIONS""$GITSOURCE" "$SOURCENAME"
+                git clone -b "$BRANCHNAME" --depth=1 "$GITOPTIONS""$GITSOURCE" "$SOURCENAME"
             else
-                git clone --single-branch --branch "$BRANCHNAME" --depth=1 "$GITOPTIONS""$GITSOURCE"
+                git clone -b "$BRANCHNAME" --depth=1 "$GITOPTIONS""$GITSOURCE"
             fi
         fi
     else
@@ -81,7 +81,13 @@ done
 
 for i in ./*; do
     if [ -d "$i" ]; then
-        continue
+        if [ -e "$i"/.git ]; then
+            cp -r "$i" ./src/"$i"
+            echo "copying git folder $i"
+        else
+            echo "skipping $i"
+            continue
+        fi
     fi
 
     FILETYPE="$(file -b $i)"
