@@ -13,10 +13,8 @@ mkdir .debcache
 cp PKGBUILD .debcache/
 cd .debcache
 pushd .
-/usr/share/ideb/controlgen.sh
 mkdir -p package/DEBIAN
 mkdir src
-mv control package/DEBIAN/
 
 export pkgdir="$(realpath ./package)"
 export srcdir="$(realpath ./src)"
@@ -46,9 +44,9 @@ for src in "${source[@]}"; do
             echo "git source found"
             GITSOURCE=$(grep -o 'https://.*\..*/.*' <<<"$src")
             if [ -n "$SOURCENAME" ]; then
-                git clone --depth=1 "$GITSOURCE"
+                git clone --depth=1 "$GITSOURCE" "$SOURCENAME"
             else
-                git clone --depth=1
+                git clone --depth=1 "$GITSOURCE"
             fi
         fi
     else
@@ -95,6 +93,12 @@ build
 package
 
 popd
+pushd .
+cd src
+/usr/share/ideb/controlgen.sh
+popd
+mv src/control package/DEBIAN/
+
 mkdir output
 dpkg-deb -Z xz -b package/ output/
 mv output/*.deb ../"$pkgname".deb
