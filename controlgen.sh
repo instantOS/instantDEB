@@ -2,6 +2,8 @@
 
 # generate a debian control file from a PKGBUILD
 
+echo "generating control file"
+
 if ! [ -e PKGBUILD ]; then
     echo "PKGBUILD not found"
     exit 1
@@ -15,7 +17,7 @@ if type pkgver; then
     pkgver="$(pkgver)"
 fi
 
-echo "Version: IDEB-$pkgver" >>control
+echo "Version: 0IDEB-$pkgver" >>control
 echo "Architecture: $(dpkg --print-architecture)" >>control
 echo "Maintainer: instantDEB <paperbenni@gmail.com>" >>control
 echo "Depends: bash" >>control
