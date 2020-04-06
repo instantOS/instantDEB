@@ -50,15 +50,15 @@ for src in "${source[@]}"; do
             if grep -q 'branch=.*$' <<<"$src"; then
                 GITSOURCE="${GITSOURCE%\#*}"
                 BRANCHNAME=$(grep -o 'branch=.*' <<<"$src" | grep -o '[^=].*$')
-                GITOPTIONS="--single-branch --branch $BRANCHNAME "
+            else
+                BRANCHNAME="master"
             fi
 
             if [ -n "$SOURCENAME" ]; then
-                git clone --depth=1 "$GITOPTIONS""$GITSOURCE" "$SOURCENAME"
+                git clone --single-branch --branch "$BRANCHNAME" --depth=1 "$GITOPTIONS""$GITSOURCE" "$SOURCENAME"
             else
-                git clone --depth=1 "$GITOPTIONS""$GITSOURCE"
+                git clone --single-branch --branch "$BRANCHNAME" --depth=1 "$GITOPTIONS""$GITSOURCE"
             fi
-            GITOPTIONS=""
         fi
     else
         if [ -n "$SOURCENAME" ]; then
