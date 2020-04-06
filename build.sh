@@ -43,10 +43,10 @@ for src in "${source[@]}"; do
             grep -q 'https://.*\..*/.*' <<<"$src"; then
             echo "git source found"
             GITSOURCE=$(grep -o 'https://.*\..*/.*' <<<"$src")
-            
-            if grep -q 'branch=.*$' <<<"src"; then
+
+            if grep -q 'branch=.*$' <<<"$src"; then
                 GITSOURCE="${GITSOURCE%\#*}"
-                BRANCHNAME=$(grep '[^=].*$' <<<"$src")
+                BRANCHNAME=$(grep -o '[^=].*$' <<<"$src")
                 GITOPTIONS="--single-branch --branch $BRANCHNAME "
             fi
 
@@ -55,6 +55,7 @@ for src in "${source[@]}"; do
             else
                 git clone --depth=1 "$GITOPTIONS""$GITSOURCE"
             fi
+            GITOPTIONS=""
         fi
     else
         if [ -n "$SOURCENAME" ]; then
