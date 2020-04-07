@@ -104,14 +104,16 @@ for i in ./*; do
 done
 
 cd src
+INSTANTSRCDIR="$(pwd)"
 
-fexit(){
-	echo "build failed"
-	exit
+fexit() {
+    echo "build failed"
+    exit
 }
 
 prepare || fexit
 build || fexit
+cd "$INSTANTSRCDIR"
 package || fexit
 
 popd
