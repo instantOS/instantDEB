@@ -105,9 +105,14 @@ done
 
 cd src
 
-prepare
-build
-package
+fexit(){
+	echo "build failed"
+	exit
+}
+
+prepare || fexit
+build || fexit
+package || fexit
 
 popd
 pushd .
