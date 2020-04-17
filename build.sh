@@ -69,9 +69,13 @@ for src in "${source[@]}"; do
 
         echo "downloading direct file"
         if [ -n "$SOURCENAME" ]; then
-            wget -O "$SOURCENAME" "$LINK"
+            wget -O "itempfile" "$LINK"
+	    cp "itempfile" src/"$SOURCENAME"
+	    mv itempfile "$SOURCENAME"
         else
-            wget "$LINK"
+            wget -O itempfile "$LINK"
+	    cp itempfile src/"$(basename $LINK)"
+	    mv itempfile "$(basename $LINK)"
         fi
     fi
 
