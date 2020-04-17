@@ -113,18 +113,21 @@ fexit() {
 
 if type prepare &> /dev/null
 then
+	echo "ideb preparing"
 	prepare || fexit
 fi
 
 if type build &> /dev/null
 then
+	echo "ideb building"
 	build || fexit
 fi
 
 cd "$INSTANTSRCDIR"
 
-if type build &> /dev/null
+if type package &> /dev/null
 then
+	echo "ideb packaging"
 	package || fexit
 fi
 
