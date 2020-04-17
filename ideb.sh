@@ -19,6 +19,9 @@ case "$1" in
 build)
     /usr/share/ideb/build.sh
     ;;
+install)
+    /usr/share/ideb/build.sh && sudo dpkg -i *.deb
+    ;;
 control)
     /usr/share/ideb/controlgen.sh
     ;;

@@ -125,7 +125,12 @@ popd
 mv src/control package/DEBIAN/
 
 mkdir output
-dpkg-deb -Z xz -b package/ output/
+if ! dpkg-deb -Z xz -b package/ output/
+then
+	echo "build failed"
+	exit 1
+fi
+
 mv output/*.deb ../"$pkgname".deb
 cd ..
 
