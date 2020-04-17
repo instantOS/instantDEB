@@ -111,10 +111,22 @@ fexit() {
     exit
 }
 
-prepare || fexit
-build || fexit
+if type prepare &> /dev/null
+then
+	prepare || fexit
+fi
+
+if type build &> /dev/null
+then
+	build || fexit
+fi
+
 cd "$INSTANTSRCDIR"
-package || fexit
+
+if type build &> /dev/null
+then
+	package || fexit
+fi
 
 popd
 pushd .
