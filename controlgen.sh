@@ -17,7 +17,7 @@ if type pkgver; then
     pkgver="$(pkgver)"
 fi
 
-echo "Version: 0IDEB-$pkgver" >>control
+echo "Version: 0IDEB-0$pkgver" >>control
 echo "Architecture: $(dpkg --print-architecture)" >>control
 echo "Maintainer: instantDEB <paperbenni@gmail.com>" >>control
 echo "Depends: bash" >>control
