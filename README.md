@@ -1,7 +1,7 @@
 <div align="center">
     <h1>instantDEB</h1>
     <p>Convert pacman packages to debian packages</p>
-    <img width="300" height="300" src="https://raw.githubusercontent.com/instantOS/instantLOGO/master/png/debian.png">
+    <img width="300" height="300" src="https://media.githubusercontent.com/media/instantOS/instantLOGO/master/png/debian.png">
 </div>
 ---------
 
