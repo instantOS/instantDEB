@@ -1,5 +1,9 @@
+get-link() {
+    grep -Eoi '<a [^>]+>' | grep -Eo 'href="[^\"]+"'
+}
+
 download() {
-   for i in $(curl https://instantos.surge.sh/ | link | grep -Eo '"(.*xz)"' | tr -d '"')
+   for i in $(curl https://instantos.surge.sh/ | get-link | grep -Eo '"(.*xz)"' | tr -d '"')
    do
        wget "https://instantos.surge.sh/$i"
    done
