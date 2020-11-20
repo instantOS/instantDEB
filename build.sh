@@ -51,7 +51,12 @@ for src in "${source[@]}"; do
                 GITSOURCE="${GITSOURCE%\#*}"
                 BRANCHNAME=$(grep -o 'branch=.*' <<<"$src" | grep -o '[^=]*$')
             else
-                BRANCHNAME="master"
+                if git ls-remote "$GITSOURCE" | grep -q 'refs.heads.master'
+                then
+                    BRANCHNAME="master"
+                else
+                    BRANCHNAME="main"
+                fi
             fi
 
             if [ -n "$SOURCENAME" ]; then
